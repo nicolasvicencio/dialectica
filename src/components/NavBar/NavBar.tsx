@@ -1,11 +1,12 @@
-import chatHelper from "@/helpers/chatHelper";
+"use client";
+import useChats from "@/hooks/useChats";
 import Link from "next/link";
 import React from "react";
 
 type Props = {};
 
-export default async function NavBar({}: Props) {
-  const chats = await chatHelper.getChats();
+export default function NavBar({}: Props) {
+  const { loading, chats } = useChats();
 
   return (
     <div className="min-h-screen md:w-[25%] flex flex-col bg-white shadow-2xl">
@@ -41,9 +42,9 @@ export default async function NavBar({}: Props) {
             </svg>
           </div>
         </div>
-
         <div className="bg-white h-full p-6 flex flex-col gap-4">
-          {chats &&
+          {!loading &&
+            chats &&
             chats.map((chat) => (
               <Link
                 key={chat.id}
@@ -64,6 +65,7 @@ export default async function NavBar({}: Props) {
               </Link>
             ))}
         </div>
+        )
       </header>
     </div>
   );
