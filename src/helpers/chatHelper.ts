@@ -9,14 +9,17 @@ export default {
         target_language: chat.target_language,
       },
     ]);
+    if (error) {
+      return;
+    }
     if (data) {
-      console.log(data);
+      return data;
     }
   },
   getChats: async function (): Promise<Chat[] | undefined> {
     const { data, error } = await supabase.from("chat").select();
     if (error) {
-      console.log(error);
+      return;
     }
     if (data) {
       return data;

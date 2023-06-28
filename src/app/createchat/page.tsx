@@ -6,7 +6,7 @@ import React, { FormEvent, useState } from "react";
 
 type Props = {};
 
-export default function CreatePage({}: Props) {
+export default function page({}: Props) {
   const [chatName, setChatName] = useState<string>("");
   const [targetLanguage, setTargetLanguage] = useState<string>("");
   const [error, setError] = useState<string>("");
