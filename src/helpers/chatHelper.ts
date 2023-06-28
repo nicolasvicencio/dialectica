@@ -1,16 +1,20 @@
-import { Chat } from "@/components/types/types";
+import { Chat } from "@/types/types";
 import { supabase } from "../services/supabase";
 
 export default {
-  createNewChat: async function (chat: Chat) {
-    const { data, error } = await supabase.from("chat").insert([
-      {
-        chat_name: chat.chat_name,
-        target_language: chat.target_language,
-      },
-    ]);
+  createNewChat: async function (chat: Chat): Promise<Chat[] | undefined> {
+    const { data, error } = await supabase
+      .from("chat")
+      .insert([
+        {
+          chat_name: chat.chat_name,
+          target_language: chat.target_language,
+        },
+      ])
+      .select();
+
     if (error) {
-      return;
+      console.log({ errorInsertChat: error });
     }
     if (data) {
       return data;
@@ -19,6 +23,7 @@ export default {
   getChats: async function (): Promise<Chat[] | undefined> {
     const { data, error } = await supabase.from("chat").select();
     if (error) {
+      console.log({ errorGetChats: error });
       return;
     }
     if (data) {

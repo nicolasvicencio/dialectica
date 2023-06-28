@@ -1,6 +1,6 @@
 "use client";
-import { Message } from "@/components/types/types";
 import messagesHelper from "@/helpers/messagesHelper";
+import { Message } from "@/types/types";
 import { useEffect, useState } from "react";
 
 export default function useMessages(chat_id: string): {

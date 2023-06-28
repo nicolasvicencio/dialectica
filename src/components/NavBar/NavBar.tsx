@@ -9,7 +9,7 @@ export default function NavBar({}: Props) {
   const { loading, chats } = useChats();
 
   return (
-    <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl">
+    <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl border-r border-r-gray-300">
       <header className="h-full ">
         <div className="flex gap-1 justify-around items-center  shadow-md py-6 px-6">
           <svg
@@ -42,7 +42,7 @@ export default function NavBar({}: Props) {
             </svg>
           </div>
         </div>
-        <div className="bg-white h-full p-6 flex flex-col gap-4">
+        <div className="bg-white min-h-full scroll overflow-y-scroll h-auto p-6 flex flex-col gap-4">
           {!loading &&
             chats &&
             chats.map((chat) => (
@@ -59,7 +59,7 @@ export default function NavBar({}: Props) {
                     {chat.chat_name.toUpperCase()}
                   </h4>
                   <p className="text-gray-600">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing d
+                    Lorem ipsum dolor si Lorem ipsu....
                   </p>
                 </div>
               </Link>

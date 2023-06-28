@@ -1,7 +1,7 @@
 "use client";
-import { Chat } from "@/components/types/types";
 import chatHelper from "@/helpers/chatHelper";
 import { supabase } from "@/services/supabase";
+import { Chat } from "@/types/types";
 import { useEffect, useState } from "react";
 
 export default function useChats(): {

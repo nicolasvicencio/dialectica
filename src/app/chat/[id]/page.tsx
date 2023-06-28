@@ -1,4 +1,5 @@
 "use client";
+import { InputComponent, TopBar } from "@/components";
 import useMessages from "@/hooks/useMessages";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -13,19 +14,22 @@ export default function page({}: Props) {
 
   if (loading)
     return (
-      <main className="pattern-background h-screen w-screen p-10 flex justify-center items-center">
+      <main className="pattern-background h-screen w-screen flex justify-center items-center">
         <PacmanLoader className="text-sky-400" />
       </main>
     );
   return (
-    <main className="pattern-background h-screen w-screen p-10">
-      <h1>{id}</h1>
-      {[0, 2, 3, 4, 5, 6, 7].map((el) => (
-        <div className="bg-white p-4 text-gray-700 my-4 rounded-xl">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam,
-          nihil.
-        </div>
-      ))}
+    <main className="pattern-background h-screen w-full flex flex-col ">
+      <TopBar />
+      <section className="p-5 flex relative">
+        {messages &&
+          messages.map((message) => (
+            <div className="shadow-lg bg-white p-4 text-gray-700 my-4 rounded-xl text-xs ">
+              {message.content}
+            </div>
+          ))}
+      </section>
+      <InputComponent />
     </main>
   );
 }
