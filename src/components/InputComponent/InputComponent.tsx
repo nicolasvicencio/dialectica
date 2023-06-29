@@ -1,13 +1,38 @@
 "use client";
+import { ROLE } from "@/constants/constans";
+import messagesHelper from "@/helpers/messagesHelper";
+import openaiHelper from "@/helpers/openaiHelper";
+import { useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
 type Props = {};
 
 export default function InputComponent({}: Props) {
   const [message, setMessage] = useState<string>("");
+  const searchParams = useSearchParams();
+  const chat_id = searchParams.get("id");
+
   async function handleSumbit(e: FormEvent) {
     e.preventDefault();
+    if (message === "") {
+      return;
+    }
+
+    const newMessage = {
+      role: ROLE.User,
+      content: message,
+    };
+
+    const response = await messagesHelper.createNewMessage({
+      chatId: chat_id!,
+      message: newMessage,
+    });
+
+    if (response) {
+      openaiHelper.sendMessageToGPT(chat_id!);
+    }
   }
+
   return (
     <div className=" flex items-center">
       <form
@@ -18,7 +43,8 @@ export default function InputComponent({}: Props) {
         <input
           type="text"
           placeholder="Write your message"
-          className="w-full shadow-sm"
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-full shadow-sm border border-stone-300"
         />
         <button type="submit" className="bg-white rounded-md p-2 shadow-sm">
           <svg

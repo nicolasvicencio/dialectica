@@ -12,7 +12,7 @@ export interface Chat {
 export interface Message {
   id?: string;
   created_at?: string;
-  chat_id: string;
+  chat_id?: string;
   content: string;
   role: string;
 }

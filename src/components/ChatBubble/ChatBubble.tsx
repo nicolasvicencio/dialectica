@@ -13,8 +13,10 @@ export default function ChatBubble({ message }: Props) {
     <div
       className={`
        ${
-         isUser ? "bg-sky-500 text-white self-end" : "bg-white text-gray-800"
-       } p-4 text-sm  rounded-lg shadow-xl max-w-[40%]`}
+         isUser
+           ? "bg-yellow-100 text-gray-800 self-end"
+           : "bg-white text-gray-800"
+       } p-4 text-sm  rounded-lg shadow-md max-w-[40%]`}
     >
       <p>{message.content}</p>
       <span className="text-xs text-gray-500">

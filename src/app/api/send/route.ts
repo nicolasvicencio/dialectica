@@ -11,5 +11,6 @@ export async function POST(request: Request) {
 
   const response = completion.data.choices[0].message;
 
+  console.log(messages);
   return new Response(JSON.stringify(response));
 }

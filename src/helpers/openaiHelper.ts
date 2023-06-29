@@ -13,6 +13,11 @@ export default {
       content: `{{ ${chat.target_language} }}`,
     };
 
+    await messagesHelper.createNewMessage({
+      chatId: chat.id!,
+      message: parsedMessageContent,
+    });
+
     requestMessage = [...CONFIG_MESSAGES, parsedMessageContent];
     const response = await useGPT({ url, body: requestMessage });
     const newMessage = await messagesHelper.createNewMessage({
@@ -24,26 +29,20 @@ export default {
       return newMessage[0];
     }
   },
-  sendMessageToGPT: async function (chat: Chat) {
-    const messages = await messagesHelper.getMessages(chat.id!);
+  sendMessageToGPT: async function (chat_id: string) {
+    const messages = await messagesHelper.getMessages(chat_id);
 
-    const parsedMessages = messages
-      ?.map((message) => ({
-        role: message.role,
-        content: message.content,
-      }))
-      .reverse();
+    const parsedMessages = messages?.map((message) => ({
+      role: message.role,
+      content: message.content,
+    }));
 
-    requestMessage = [...CONFIG_MESSAGES, parsedMessages];
+    //@ts-ignore
+    requestMessage = [...CONFIG_MESSAGES, ...parsedMessages];
+    const response = await useGPT({ url, body: requestMessage });
 
-    const res = await fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestMessage),
-    });
-
-    const json = await res.json();
-    console.log(json);
+    if (response) {
+      console.log({ openairesponse: response });
+    }
   },
 };

@@ -1,13 +1,12 @@
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
-type Props = {
-  chat_name: string;
-  target_language: string;
-};
-
-export default function TopBar({ chat_name, target_language }: Props) {
+export default function TopBar() {
+  const searchParams = useSearchParams();
+  const chat_name = searchParams.get("chat_name");
+  const target_language = searchParams.get("target_language");
   return (
-    <div className="  w-full py-3 px-4  bg-white flex justify-between items-center shadow-xl">
+    <div className="  w-full py-3 px-4  bg-white flex justify-between items-center shadow-md">
       <div className="flex flex-col ">
         <h2 className="text-sm text-sky-800 font-semibold">{chat_name}</h2>
         <span className="text-gray-500 text-xs">
