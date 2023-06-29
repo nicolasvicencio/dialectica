@@ -65,7 +65,7 @@ export default function NavBar({}: Props) {
                   query: {
                     chat_name: chat.chat_name,
                     target_language: chat.target_language,
-                    id: chat.id,
+                    chat_id: chat.id,
                   },
                 }}
                 className="flex items-center gap-4 text-xs hover:bg-stone-200 p-2 px-4 transition-all "

@@ -30,4 +30,12 @@ export default {
       return data;
     }
   },
+  deleteChat: async function (id: string) {
+    const { error } = await supabase.from("chat").delete().eq("id", id);
+
+    if (error) {
+      console.log({ errorDeleteChat: error });
+      return;
+    }
+  },
 };
