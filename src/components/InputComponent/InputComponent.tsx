@@ -9,10 +9,18 @@ export default function InputComponent({}: Props) {
     e.preventDefault();
   }
   return (
-    <div className="w-4/5 flex justify-center items-center absolute bottom-6 right-0 left-0">
-      <form action="" className="flex gap-6" onSubmit={(e) => handleSumbit(e)}>
-        <input type="text" placeholder="Write your message" className="" />
-        <button type="submit" className="bg-white rounded-md p-2">
+    <div className=" flex items-center">
+      <form
+        action=""
+        className="flex gap-6 w-full px-6 pb-3"
+        onSubmit={(e) => handleSumbit(e)}
+      >
+        <input
+          type="text"
+          placeholder="Write your message"
+          className="w-full shadow-sm"
+        />
+        <button type="submit" className="bg-white rounded-md p-2 shadow-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

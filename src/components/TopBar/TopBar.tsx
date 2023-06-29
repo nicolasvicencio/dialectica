@@ -9,9 +9,9 @@ export default function TopBar({ chat_name, target_language }: Props) {
   return (
     <div className="  w-full py-3 px-4  bg-white flex justify-between items-center shadow-xl">
       <div className="flex flex-col ">
-        <h2 className="text-sm text-gray-700 font-semibold">{chat_name}</h2>
+        <h2 className="text-sm text-sky-800 font-semibold">{chat_name}</h2>
         <span className="text-gray-500 text-xs">
-          Target_language - <b>{target_language}</b> -
+          Target_language <b>{target_language}</b>
         </span>
       </div>
       <svg

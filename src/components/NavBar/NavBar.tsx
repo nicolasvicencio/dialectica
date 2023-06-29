@@ -9,9 +9,9 @@ export default function NavBar({}: Props) {
   const { loading, chats } = useChats();
 
   return (
-    <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl border-r border-r-gray-300">
+    <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl ">
       <header className="h-full ">
-        <div className="flex gap-1 justify-around items-center  shadow-md py-2 px-6 border-b border-b-gray-300">
+        <div className="flex gap-1 justify-around items-center  shadow-md py-2 pb-3 px-6 border-b border-b-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
