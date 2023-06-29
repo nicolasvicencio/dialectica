@@ -11,7 +11,7 @@ export default function NavBar({}: Props) {
   return (
     <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl border-r border-r-gray-300">
       <header className="h-full ">
-        <div className="flex gap-1 justify-around items-center  shadow-md py-4 px-6 border-b border-b-gray-300">
+        <div className="flex gap-1 justify-around items-center  shadow-md py-2 px-6 border-b border-b-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -60,7 +60,13 @@ export default function NavBar({}: Props) {
             chats.map((chat) => (
               <Link
                 key={chat.id}
-                href={`/chat/${chat.id}`}
+                href={{
+                  pathname: `/chat/${chat.id}`,
+                  query: {
+                    chat_name: chat.chat_name,
+                    target_language: chat.target_language,
+                  },
+                }}
                 className="flex items-center gap-4 text-xs hover:bg-stone-200 p-2 px-4 transition-all "
               >
                 <div className="w-10 h-10 rounded-full bg-sky-600 flex justify-center items-center text-white font-bold text-xs">

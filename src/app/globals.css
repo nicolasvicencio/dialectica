@@ -19,12 +19,12 @@ label {
 }
 
 input {
-  @apply px-2 py-2 rounded-xl relative bg-gray-100 text-gray-500;
+  @apply px-2 py-2 rounded-xl relative bg-gray-200 text-gray-500;
 }
 
 option,
 select {
-  @apply text-gray-500 py-2 px-2 rounded-xl bg-gray-100;
+  @apply text-gray-500 py-2 px-2 rounded-xl bg-gray-200;
 }
 
 .btn-primary {
