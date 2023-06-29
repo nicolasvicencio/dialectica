@@ -11,7 +11,7 @@ export default function NavBar({}: Props) {
   return (
     <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl border-r border-r-gray-300">
       <header className="h-full ">
-        <div className="flex gap-1 justify-around items-center  shadow-md py-6 px-6">
+        <div className="flex gap-1 justify-around items-center  shadow-md py-4 px-6 border-b border-b-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -42,14 +42,26 @@ export default function NavBar({}: Props) {
             </svg>
           </div>
         </div>
-        <div className="bg-white min-h-full scroll overflow-y-scroll h-auto p-6 flex flex-col gap-4">
+        <div className="bg-white min-h-full h-auto flex flex-col ">
+          <Link
+            href={`/createchat`}
+            className="flex items-center gap-4 text-xs hover:bg-stone-200 p-2 px-4 transition-all"
+          >
+            <div className="w-10 h-10 rounded-full flex justify-center items-center text-gray-500 border-gray-500 border  text-xl">
+              +
+            </div>
+            <div className="flex justify-center items-center text-gray-500 text-base">
+              <h3>Create Chat</h3>
+            </div>
+          </Link>
+
           {!loading &&
             chats &&
             chats.map((chat) => (
               <Link
                 key={chat.id}
                 href={`/chat/${chat.id}`}
-                className="flex items-center gap-4 text-xs hover:bg-sky-200 p-2 px-4 rounded-full"
+                className="flex items-center gap-4 text-xs hover:bg-stone-200 p-2 px-4 transition-all "
               >
                 <div className="w-10 h-10 rounded-full bg-sky-600 flex justify-center items-center text-white font-bold text-xs">
                   En
