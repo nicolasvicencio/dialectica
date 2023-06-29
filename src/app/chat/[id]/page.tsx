@@ -1,5 +1,5 @@
 "use client";
-import { InputComponent, TopBar } from "@/components";
+import { ChatBubble, InputComponent, TopBar } from "@/components";
 import useMessages from "@/hooks/useMessages";
 import { usePathname, useSearchParams } from "next/navigation";
 import React from "react";
@@ -22,17 +22,15 @@ export default function page({}: Props) {
       </main>
     );
   return (
-    <main className="pattern-background h-screen w-full flex flex-col ">
-      <TopBar chat_name={chat_name} target_language={target_language} />
-      <section className="p-5 flex relative">
+    <main className="pattern-background h-screen w-full flex flex-col  ">
+      <TopBar chat_name={chat_name!} target_language={target_language!} />
+      <section className="p-5 h-full w-full  flex flex-col">
         {messages &&
-          messages.map((message) => (
-            <div className="shadow-lg bg-white p-4 text-gray-700 my-4 rounded-xl text-xs ">
-              {message.content}
-            </div>
-          ))}
+          messages.map((message) => <ChatBubble message={message} />)}
       </section>
-      <InputComponent />
+      <div>
+        <InputComponent />
+      </div>
     </main>
   );
 }
