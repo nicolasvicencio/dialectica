@@ -1,5 +1,5 @@
 import { supabase } from "@/services/supabase";
-import { Chat, Message, StoreType } from "@/types/types";
+import { Chat, StoreType } from "@/types/types";
 import { create } from "zustand";
 import { CONFIG_MESSAGES, ROLE, API_URL } from "../constans";
 import useGPT from "@/hooks/useGTP";
@@ -61,14 +61,14 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     };
 
     await get().createNewMessage({
-      chatId: chat.id!,
+      chat_id: chat.id!,
       message: parsedMessageContent,
     });
 
     const requestMessage = [...CONFIG_MESSAGES, parsedMessageContent];
     const response = await useGPT({ url: API_URL, body: requestMessage });
     const newMessage = await get().createNewMessage({
-      chatId: chat.id!,
+      chat_id: chat.id!,
       message: response,
     });
 
@@ -95,11 +95,11 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
       }));
     }
   },
-  createNewMessage: async function ({ chatId, message }) {
+  createNewMessage: async function ({ chat_id, message }) {
     const { data, error } = await supabase
       .from("messages")
       .insert([
-        { chat_id: chatId, role: message.role, content: message.content },
+        { chat_id: chat_id, role: message.role, content: message.content },
       ])
       .select();
 
@@ -107,24 +107,26 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
       console.log({ errorInsertMessage: error });
     }
     if (data) {
-      get().getMessages(chatId);
+      get().getMessages(chat_id);
       return data;
     }
   },
   sendMessageToGPT: async function (chat_id: string) {
     const messages = get().messages;
-
     const parsedMessages = messages?.map((message) => ({
       role: message.role,
       content: message.content,
     }));
 
-    //@ts-ignore
     const requestMessage = [...CONFIG_MESSAGES, ...parsedMessages];
     const response = await useGPT({ url: API_URL, body: requestMessage });
 
     if (response) {
-      console.log({ openairesponse: response });
+      const gptMessage = {
+        role: response.role,
+        content: response.content,
+      };
+      get().createNewMessage({ chat_id: chat_id, message: gptMessage });
     }
   },
 }));

@@ -24,7 +24,7 @@ export default function page({}: Props) {
     );
 
   return (
-    <main className="pattern-background h-screen w-full flex flex-col  ">
+    <main className="pattern-background h-screen w-full flex flex-col ">
       <TopBar />
       <section className="p-5 h-full w-full  flex flex-col gap-4">
         {messages &&

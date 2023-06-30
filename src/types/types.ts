@@ -32,10 +32,10 @@ export interface StoreType {
   configNewChat: (chat: Chat) => Promise<void | Message>;
   getMessages: (id: string) => Promise<void>;
   createNewMessage: ({
-    chatId,
+    chat_id,
     message,
   }: {
-    chatId: string;
+    chat_id: string;
     message: Message;
   }) => Promise<void | Message[]>;
   sendMessageToGPT: (chat_id: string) => Promise<void>;

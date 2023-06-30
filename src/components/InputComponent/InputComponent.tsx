@@ -9,7 +9,7 @@ type Props = {};
 export default function InputComponent({}: Props) {
   const [message, setMessage] = useState<string>("");
   const searchParams = useSearchParams();
-  const chat_id = searchParams.get("id");
+  const chat_id = searchParams.get("chat_id");
   const { sendMessageToGPT, createNewMessage } = useGlobalStore();
 
   async function handleSumbit(e: FormEvent) {
@@ -17,14 +17,14 @@ export default function InputComponent({}: Props) {
     if (message === "") {
       return;
     }
-
+    setMessage("");
     const newMessage = {
       role: ROLE.User,
       content: message,
     };
 
     const response = await createNewMessage({
-      chatId: chat_id!,
+      chat_id: chat_id!,
       message: newMessage,
     });
 
