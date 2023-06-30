@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessageRoleEnum } from "openai/dist/api";
-
+export const API_URL = "http://localhost:3000/api/send";
 export const LANGUAGES = [
   "Select an option",
   "English",

@@ -1,3 +1,4 @@
+import { useGlobalStore } from "@/constants/store/store";
 import chatHelper from "@/helpers/chatHelper";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -8,10 +9,11 @@ export default function TopBar() {
   const target_language = searchParams.get("target_language");
   const chat_id = searchParams.get("chat_id");
   const router = useRouter();
+  const { deleteChat } = useGlobalStore();
 
   function handleDelete() {
-    chatHelper.deleteChat(chat_id!);
     router.push("/");
+    deleteChat(chat_id!);
   }
 
   return (

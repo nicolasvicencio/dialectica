@@ -1,7 +1,6 @@
 "use client";
 import { ROLE } from "@/constants/constans";
-import messagesHelper from "@/helpers/messagesHelper";
-import openaiHelper from "@/helpers/openaiHelper";
+import { useGlobalStore } from "@/constants/store/store";
 import { useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
@@ -11,6 +10,7 @@ export default function InputComponent({}: Props) {
   const [message, setMessage] = useState<string>("");
   const searchParams = useSearchParams();
   const chat_id = searchParams.get("id");
+  const { sendMessageToGPT, createNewMessage } = useGlobalStore();
 
   async function handleSumbit(e: FormEvent) {
     e.preventDefault();
@@ -23,13 +23,13 @@ export default function InputComponent({}: Props) {
       content: message,
     };
 
-    const response = await messagesHelper.createNewMessage({
+    const response = await createNewMessage({
       chatId: chat_id!,
       message: newMessage,
     });
 
     if (response) {
-      openaiHelper.sendMessageToGPT(chat_id!);
+      sendMessageToGPT(chat_id!);
     }
   }
 

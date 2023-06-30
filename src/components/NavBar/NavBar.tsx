@@ -1,12 +1,16 @@
 "use client";
-import useChats from "@/hooks/useChats";
+import { useGlobalStore } from "@/constants/store/store";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {};
 
 export default function NavBar({}: Props) {
-  const { loading, chats } = useChats();
+  const { chats, getChats } = useGlobalStore();
+
+  useEffect(() => {
+    getChats();
+  }, []);
 
   return (
     <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl ">
@@ -55,8 +59,7 @@ export default function NavBar({}: Props) {
             </div>
           </Link>
 
-          {!loading &&
-            chats &&
+          {chats &&
             chats.map((chat) => (
               <Link
                 key={chat.id}

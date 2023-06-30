@@ -1,6 +1,6 @@
 "use client";
 import { LANGUAGES } from "@/constants/constans";
-import chatHelper from "@/helpers/chatHelper";
+import { useGlobalStore } from "@/constants/store/store";
 import openaiHelper from "@/helpers/openaiHelper";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
@@ -12,6 +12,7 @@ export default function page({}: Props) {
   const [targetLanguage, setTargetLanguage] = useState<string>("");
   const [error, setError] = useState<string>("");
   const router = useRouter();
+  const { createNewChat, configNewChat } = useGlobalStore();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -20,14 +21,13 @@ export default function page({}: Props) {
       return;
     }
 
-    const newChat = await chatHelper.createNewChat({
+    const newChat = await createNewChat({
       chat_name: chatName,
       target_language: targetLanguage,
     });
 
     if (newChat) {
-      const newMessage = await openaiHelper.configNewChat(newChat[0]);
-
+      const newMessage = await configNewChat(newChat[0]);
       router.push(`/chat/${newMessage!.id}`);
     }
   }
@@ -35,11 +35,7 @@ export default function page({}: Props) {
   return (
     <div className="pattern-background min-h-screen flex justify-center items-center animate-fade animate-once">
       <section className="bg-white rounded-xl w-[90%] md:w-[50%] p-6 py-10 shadow-2xl">
-        <form
-          action=""
-          className="flex flex-col gap-8"
-          onClick={(e) => handleSubmit(e)}
-        >
+        <form className="flex flex-col gap-8" onSubmit={(e) => handleSubmit(e)}>
           <div className="flex flex-col gap-2">
             <label htmlFor="name">Chat Name</label>
             <input

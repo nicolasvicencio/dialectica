@@ -26,6 +26,9 @@ option,
 select {
   @apply text-gray-500 py-2 px-2 rounded-xl bg-gray-200;
 }
+span {
+  @apply cursor-default;
+}
 
 .btn-primary {
   @apply p-2 bg-sky-600 text-white font-semibold text-center rounded-md;

@@ -21,3 +21,22 @@ export interface OpenAIMessage {
   role: string;
   content: string;
 }
+
+export interface StoreType {
+  chats: Chat[];
+  messages: Message[];
+  loading: boolean;
+  getChats: () => Promise<void>;
+  createNewChat: (chat: Chat) => Promise<void | Chat[]>;
+  deleteChat: (id: string) => Promise<void>;
+  configNewChat: (chat: Chat) => Promise<void | Message>;
+  getMessages: (id: string) => Promise<void>;
+  createNewMessage: ({
+    chatId,
+    message,
+  }: {
+    chatId: string;
+    message: Message;
+  }) => Promise<void | Message[]>;
+  sendMessageToGPT: (chat_id: string) => Promise<void>;
+}
