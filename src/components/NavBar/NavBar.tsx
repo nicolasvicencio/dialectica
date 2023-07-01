@@ -2,48 +2,50 @@
 import { useGlobalStore } from "@/constants/store/store";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { ChatNavItem } from "../ChatNavItem";
 
 type Props = {};
 
 export default function NavBar({}: Props) {
-  const { chats, getChats } = useGlobalStore();
+  const { chats, getChats, navOpen, toogleNavOpen } = useGlobalStore();
 
   useEffect(() => {
     getChats();
   }, []);
 
   return (
-    <div className="min-h-screen hidden md:w-[25%] md:flex md:flex-col bg-white shadow-2xl ">
+    <div
+      className={`${
+        !navOpen && "absolute top-0 left-0 "
+      } min-h-screen w-[10%] min-w-fit max-w-fit lg:static lg:w-[25%] lg:flex lg:flex-col bg-white shadow-2xl `}
+    >
       <header className="h-full ">
-        <div className="flex gap-1 justify-around items-center  shadow-md py-2 pb-3 px-6 border-b border-b-gray-300">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-6 h-6 text-gray-500"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <div className="relative flex justify-between items-center">
-            <input type="text" placeholder="Search Chat" />
+        <div className="flex gap-4 items-center shadow-md py-4 px-6 border-b border-b-gray-300 border-r border-r-gray-300">
+          <button onClick={toogleNavOpen} className="lg:hidden">
+            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
+              strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 text-gray-400 right-0  absolute pr-1"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
               />
             </svg>
+          </button>
+          <div
+            className={`${
+              navOpen && "hidden "
+            } lg:relative lg:flex lg:justify-center lg:items-center  w-full h-full`}
+          >
+            <h1 className="tracking-widest font-semibold text-gray-500 text-center">
+              Dialectica
+            </h1>
           </div>
         </div>
         <div className="bg-white min-h-full h-auto flex flex-col ">
@@ -54,40 +56,18 @@ export default function NavBar({}: Props) {
             <div className="w-10 h-10 rounded-full flex justify-center items-center text-gray-500 border-gray-500 border  text-xl">
               +
             </div>
-            <div className="flex justify-center items-center text-gray-500 text-base">
+            <div
+              className={`${
+                navOpen && "hidden "
+              } lg:flex lg:justify-center lg:items-center text-gray-500 text-sm`}
+            >
               <h3>Create Chat</h3>
             </div>
           </Link>
 
           {chats &&
-            chats.map((chat) => (
-              <Link
-                key={chat.id}
-                href={{
-                  pathname: `/chat/${chat.id}`,
-                  query: {
-                    chat_name: chat.chat_name,
-                    target_language: chat.target_language,
-                    chat_id: chat.id,
-                  },
-                }}
-                className="flex items-center gap-4 text-xs hover:bg-stone-200 p-2 px-4 transition-all "
-              >
-                <div className="w-10 h-10 rounded-full bg-sky-600 flex justify-center items-center text-white font-bold text-xs">
-                  En
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800">
-                    {chat.chat_name.toUpperCase()}
-                  </h4>
-                  <p className="text-gray-600">
-                    Lorem ipsum dolor si Lorem ipsu....
-                  </p>
-                </div>
-              </Link>
-            ))}
+            chats.map((chat) => <ChatNavItem chat={chat} key={chat.id} />)}
         </div>
-        )
       </header>
     </div>
   );

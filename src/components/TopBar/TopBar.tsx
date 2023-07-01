@@ -1,6 +1,6 @@
+"use client";
 import { useGlobalStore } from "@/constants/store/store";
-import chatHelper from "@/helpers/chatHelper";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function TopBar() {
@@ -18,9 +18,9 @@ export default function TopBar() {
 
   return (
     <div className="  w-full py-3 px-4  bg-white flex justify-between items-center shadow-md">
-      <div className="flex flex-col ">
+      <div className="flex flex-col items-start ">
         <h2 className="text-sm text-sky-800 font-semibold">{chat_name}</h2>
-        <span className="text-gray-500 text-xs">
+        <span className="text-gray-500 text-[0.7rem]">
           Target_language <b>{target_language}</b>
         </span>
       </div>

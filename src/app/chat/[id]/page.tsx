@@ -2,7 +2,7 @@
 import { ChatBubble, InputComponent, TopBar } from "@/components";
 import { useGlobalStore } from "@/constants/store/store";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { DotLoader } from "react-spinners";
 
 type Props = {};
@@ -26,7 +26,7 @@ export default function page({}: Props) {
   return (
     <main className="pattern-background h-screen w-full flex flex-col ">
       <TopBar />
-      <section className="p-5 h-full w-full  flex flex-col gap-4">
+      <section className="p-5 max-h-[85%] h-screen w-full  flex flex-col gap-4 overflow-auto ">
         {messages &&
           messages.map((message, i) => {
             if (i !== 0) {

@@ -17,7 +17,6 @@ export default function InputComponent({}: Props) {
     if (message === "") {
       return;
     }
-    setMessage("");
     const newMessage = {
       role: ROLE.User,
       content: message,
@@ -27,6 +26,7 @@ export default function InputComponent({}: Props) {
       chat_id: chat_id!,
       message: newMessage,
     });
+    setMessage("");
 
     if (response) {
       sendMessageToGPT(chat_id!);
@@ -35,11 +35,7 @@ export default function InputComponent({}: Props) {
 
   return (
     <div className=" flex items-center">
-      <form
-        action=""
-        className="flex gap-6 w-full px-6 pb-3"
-        onSubmit={(e) => handleSumbit(e)}
-      >
+      <form className="flex gap-6 w-full px-6 pb-3" onSubmit={handleSumbit}>
         <input
           type="text"
           placeholder="Write your message"

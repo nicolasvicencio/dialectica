@@ -1,12 +1,14 @@
-import { NavBar } from "@/components";
+import { NavBar, TopBar } from "@/components";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Open_Sans, Poppins } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
+const open = Open_Sans({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["devanagari"], weight: ["500"] });
 
 export const metadata = {
-  title: "Language GPT",
-  description: "Using GPT like you language companion",
+  title: "Dialectica",
+  description: "Use GPT like you language companion",
 };
 
 export default function RootLayout({
@@ -16,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <div className="flex mx-auto">
           <NavBar />
           {children}

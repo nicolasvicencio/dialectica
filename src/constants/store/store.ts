@@ -7,7 +7,11 @@ import useGPT from "@/hooks/useGTP";
 export const useGlobalStore = create<StoreType>((set, get) => ({
   chats: [],
   messages: [],
-  loading: true,
+  loading: false,
+  navOpen: true,
+  toogleNavOpen: () => {
+    set((state) => ({ ...state, navOpen: !state.navOpen }));
+  },
   getChats: async () => {
     set((state) => ({ ...state, loading: true }));
     const { data, error } = await supabase.from("chat").select();
@@ -119,6 +123,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     }));
 
     const requestMessage = [...CONFIG_MESSAGES, ...parsedMessages];
+    console.log(requestMessage);
     const response = await useGPT({ url: API_URL, body: requestMessage });
 
     if (response) {
@@ -127,6 +132,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
         content: response.content,
       };
       get().createNewMessage({ chat_id: chat_id, message: gptMessage });
+      get().getMessages(chat_id);
     }
   },
 }));

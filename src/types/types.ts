@@ -26,6 +26,8 @@ export interface StoreType {
   chats: Chat[];
   messages: Message[];
   loading: boolean;
+  navOpen: boolean;
+  toogleNavOpen: () => void;
   getChats: () => Promise<void>;
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;
   deleteChat: (id: string) => Promise<void>;

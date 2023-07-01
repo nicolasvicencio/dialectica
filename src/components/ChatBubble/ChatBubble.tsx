@@ -15,13 +15,15 @@ export default function ChatBubble({ message }: Props) {
        ${
          isUser
            ? "bg-yellow-100 text-gray-800 self-end animate-fade-left animate-ease-in"
-           : "bg-white text-gray-600 animate-fade-right animate-ease-in"
-       } p-2 text-sm  rounded-lg shadow-md max-w-[40%]`}
+           : "bg-white text-gray-500 animate-fade-right animate-ease-in"
+       } p-2 px-3 text-xs  rounded-lg shadow-md md:max-w-[40%] max-w-[60%] w-fit`}
     >
       <p>{message.content}</p>
-      <span className="text-xs text-gray-400 hover:text-gray-500 cursor-default text-right">
-        {parseDate(message.created_at!)}
-      </span>
+      <section className="flex justify-end">
+        <span className="text-sx text-gray-400 hover:text-gray-500 cursor-default text-right bg-red">
+          {parseDate(message.created_at!)}
+        </span>
+      </section>
     </div>
   );
 }

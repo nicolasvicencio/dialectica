@@ -1,7 +1,6 @@
 "use client";
 import { LANGUAGES } from "@/constants/constans";
 import { useGlobalStore } from "@/constants/store/store";
-import openaiHelper from "@/helpers/openaiHelper";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
@@ -28,7 +27,9 @@ export default function page({}: Props) {
 
     if (newChat) {
       const newMessage = await configNewChat(newChat[0]);
-      router.push(`/chat/${newMessage!.id}`);
+      if (newMessage) {
+        router.push(`/chat/${newChat[0].id}`);
+      }
     }
   }
 

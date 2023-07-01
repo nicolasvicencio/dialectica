@@ -38,4 +38,26 @@ export const CONFIG_MESSAGES = [
       sation going, if i make any grammar or spelling mistakes, you should tell me in the reply. The target language will be surrounded by '{{' and '}}'. The first message will be the target language for your configura
       tion you have to remember it. You don't have to use "{{" and "}}" to reply `,
   },
+  // {
+  //   role: ChatCompletionRequestMessageRoleEnum.Assistant,
+  //   content:
+  //     "Sure, I'm ready to start our conversation. What language would you like to practice?",
+  // },
+  // {
+  //   role: ChatCompletionRequestMessageRoleEnum.User,
+  //   content: "{{English}}",
+  // },
+  // {
+  //   role: ChatCompletionRequestMessageRoleEnum.Assistant,
+  //   content: "Hi, how was your day so far?",
+  // },
+  // {
+  //   role: ChatCompletionRequestMessageRoleEnum.User,
+  //   content:
+  //     "Let's start again I will provide you a new language, your reply has to be a greeting with a question for me",
+  // },
+  // {
+  //   role: ChatCompletionRequestMessageRoleEnum.Assistant,
+  //   content: "Alright, let's start! What language should we practice?",
+  // },
 ];
