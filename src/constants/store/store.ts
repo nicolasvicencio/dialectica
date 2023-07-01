@@ -82,7 +82,6 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     }
   },
   getMessages: async function (id: string) {
-    set((state) => ({ ...state, loading: true }));
     const { data, error } = await supabase
       .from("messages")
       .select()

@@ -14,8 +14,8 @@ export default function ChatBubble({ message }: Props) {
       className={`
        ${
          isUser
-           ? "bg-yellow-100 text-gray-800 self-end animate-fade-left animate-ease-in"
-           : "bg-white text-gray-500 animate-fade-right animate-ease-in"
+           ? "bg-yellow-100 text-gray-500 self-end animate-fade-left animate-ease-linear rounded-tr-none "
+           : "bg-white text-gray-500  animate-fade-right animate-ease-linear rounded-tl-none "
        } p-2 px-3 text-xs  rounded-lg shadow-md md:max-w-[40%] max-w-[60%] w-fit`}
     >
       <p>{message.content}</p>

@@ -22,7 +22,6 @@ export default function NavBar({}: Props) {
       <header className="h-full ">
         <div className="flex gap-4 items-center shadow-md py-4 px-6 border-b border-b-gray-300 border-r border-r-gray-300">
           <button onClick={toogleNavOpen} className="lg:hidden">
-            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -43,9 +42,11 @@ export default function NavBar({}: Props) {
               navOpen && "hidden "
             } lg:relative lg:flex lg:justify-center lg:items-center  w-full h-full`}
           >
-            <h1 className="tracking-widest font-semibold text-gray-500 text-center">
-              Dialectica
-            </h1>
+            <Link href={"/"}>
+              <h1 className="tracking-widest font-semibold text-gray-500 text-center hover:text-gray-700">
+                Dialectica
+              </h1>
+            </Link>
           </div>
         </div>
         <div className="bg-white min-h-full h-auto flex flex-col ">
