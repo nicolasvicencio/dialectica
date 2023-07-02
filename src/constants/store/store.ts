@@ -96,6 +96,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
         messages: data,
         loading: false,
       }));
+      return data;
     }
   },
   createNewMessage: async function ({ chat_id, message }) {
@@ -133,5 +134,13 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
       get().createNewMessage({ chat_id: chat_id, message: gptMessage });
       get().getMessages(chat_id);
     }
+  },
+  getLastLine: async function (chat_id: string) {
+    const { data, error } = await supabase
+      .from("messages")
+      .select("content")
+      .eq("chat_id", chat_id);
+
+    return data![data!.length - 1]?.content;
   },
 }));

@@ -17,7 +17,7 @@ export default function NavBar({}: Props) {
     <div
       className={`${
         !navOpen && "absolute top-0 left-0 "
-      } min-h-screen w-[10%] min-w-fit max-w-fit lg:static lg:w-[25%] lg:flex lg:flex-col bg-white shadow-2xl `}
+      } min-h-screen w-[10%] lg:max-w-fit min-w-fit lg:min-w-[20%] max-w-fit lg:static lg:w-[25%] lg:flex lg:flex-col bg-white shadow-2xl `}
     >
       <header className="h-full ">
         <div className="flex gap-4 items-center shadow-md py-4 px-6 border-b border-b-gray-300 border-r border-r-gray-300">

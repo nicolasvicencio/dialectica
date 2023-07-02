@@ -1,5 +1,3 @@
-import { LANGUAGES, ROLE } from "@/constants/constans";
-
 export interface Chat {
   id?: string;
   created_at?: string;
@@ -32,7 +30,7 @@ export interface StoreType {
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;
   deleteChat: (id: string) => Promise<void>;
   configNewChat: (chat: Chat) => Promise<void | Message>;
-  getMessages: (id: string) => Promise<void>;
+  getMessages: (id: string) => Promise<void | Message[]>;
   createNewMessage: ({
     chat_id,
     message,
@@ -41,4 +39,5 @@ export interface StoreType {
     message: Message;
   }) => Promise<void | Message[]>;
   sendMessageToGPT: (chat_id: string) => Promise<void>;
+  getLastLine: (chat_id: string) => Promise<{ content: any }[] | null>;
 }
