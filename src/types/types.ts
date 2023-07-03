@@ -1,3 +1,5 @@
+import { Session } from "@supabase/supabase-js";
+
 export interface Chat {
   id?: string;
   created_at?: string;
@@ -40,4 +42,10 @@ export interface StoreType {
   }) => Promise<void | Message[]>;
   sendMessageToGPT: (chat_id: string) => Promise<void>;
   getLastLine: (chat_id: string) => Promise<{ content: any }[] | null>;
+}
+
+export interface SessionStoreType {
+  session: Session | null;
+  getSession: () => Promise<void>;
+  authStateChanged: () => void;
 }

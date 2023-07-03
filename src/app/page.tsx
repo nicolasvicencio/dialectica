@@ -8,8 +8,8 @@ export default function Home() {
         <section className="flex flex-col justify-center p-6 md:w-1/2 gap-20">
           <div className="flex flex-col gap-4 animate-fade-right animate-ease-in">
             <h1 className="text-gray-900 text-2xl text-semibold">
-              Dialectica Utiliza la inteligencia artificial como tu compañero de
-              idiomas!
+              Dialectica, Utiliza la inteligencia artificial como tu compañero
+              de idiomas!
             </h1>
             <p className="text-zinc-700">
               ¡Bienvenido a <b className="text-blue-700">Dialectica!</b> La
@@ -56,7 +56,7 @@ export default function Home() {
           </nav>
         </section>
         <section className="flex justify-end items-center w-1/2 animate-fade-left animate-delay-[3000ms] animate-ease-in">
-          <img src="/hero.png" alt="" className="md:pl-20 rounded-xl" />
+          <img src="/hero.png" alt="" className="pl-20 rounded-xl" />
         </section>
       </main>
     </main>
