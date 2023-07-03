@@ -18,12 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <div className="flex mx-auto">
-          <NavBar />
-          {children}
-        </div>
-      </body>
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }

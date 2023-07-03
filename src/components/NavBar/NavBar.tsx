@@ -16,7 +16,7 @@ export default function NavBar({}: Props) {
   return (
     <div
       className={`${
-        !navOpen && "absolute top-0 left-0 "
+        !navOpen && "absolute top-0 left-0 z-40"
       } min-h-screen w-[10%] lg:max-w-fit min-w-fit lg:min-w-[20%] max-w-fit lg:static lg:w-[25%] lg:flex lg:flex-col bg-white shadow-2xl `}
     >
       <header className="h-full ">
@@ -62,7 +62,7 @@ export default function NavBar({}: Props) {
                 navOpen && "hidden "
               } lg:flex lg:justify-center lg:items-center text-gray-500 text-sm`}
             >
-              <h3>Create Chat</h3>
+              <h3>Crear Chat</h3>
             </div>
           </Link>
 
