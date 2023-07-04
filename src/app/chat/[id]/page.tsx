@@ -1,6 +1,6 @@
 "use client";
 import { ChatBubble, Container, InputComponent, TopBar } from "@/components";
-import { useGlobalStore } from "@/constants/store/store";
+import { useGlobalStore } from "@/store/store";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 import { DotLoader } from "react-spinners";

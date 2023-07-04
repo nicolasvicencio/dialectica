@@ -1,8 +1,8 @@
 import { supabase } from "@/services/supabase";
 import { Chat, StoreType } from "@/types/types";
 import { create } from "zustand";
-import { CONFIG_MESSAGES, ROLE, API_URL } from "../constans";
 import useGPT from "@/hooks/useGTP";
+import { API_URL, CONFIG_MESSAGES, ROLE } from "@/constants/constans";
 
 export const useGlobalStore = create<StoreType>((set, get) => ({
   chats: [],

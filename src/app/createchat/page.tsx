@@ -1,7 +1,7 @@
 "use client";
 import { Container } from "@/components";
 import { LANGUAGES } from "@/constants/constans";
-import { useGlobalStore } from "@/constants/store/store";
+import { useGlobalStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
