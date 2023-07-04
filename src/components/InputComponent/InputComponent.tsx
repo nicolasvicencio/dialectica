@@ -1,6 +1,6 @@
 "use client";
 import { ROLE } from "@/constants/constans";
-import { useGlobalStore } from "@/constants/store/store";
+import { useGlobalStore } from "@/store/store";
 import { useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 

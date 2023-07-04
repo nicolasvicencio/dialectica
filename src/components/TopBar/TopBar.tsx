@@ -1,5 +1,5 @@
 "use client";
-import { useGlobalStore } from "@/constants/store/store";
+import { useGlobalStore } from "@/store/store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 

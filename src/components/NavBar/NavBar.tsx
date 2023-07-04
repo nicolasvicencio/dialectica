@@ -1,8 +1,8 @@
 "use client";
-import { useGlobalStore } from "@/constants/store/store";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { ChatNavItem } from "../ChatNavItem";
+import { useGlobalStore } from "@/store/store";
 
 type Props = {};
 

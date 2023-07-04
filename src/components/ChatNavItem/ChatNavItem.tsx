@@ -1,5 +1,5 @@
 "use client";
-import { useGlobalStore } from "@/constants/store/store";
+import { useGlobalStore } from "@/store/store";
 import { Chat } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
