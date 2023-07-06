@@ -27,7 +27,7 @@ export interface StoreType {
   messages: Message[];
   loading: boolean;
   navOpen: boolean;
-  session: Session | null;
+  session: any | null;
   getSession: () => Promise<
     { session: Session } | { session: null } | { session: null }
   >;
