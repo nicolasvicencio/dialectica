@@ -1,23 +1,29 @@
-import { supabase, supabaseNextAuth } from "@/services/supabase";
+import { supabase } from "@/services/supabase";
 import { Chat, StoreType } from "@/types/types";
 import { create } from "zustand";
 import useGPT from "@/hooks/useGTP";
 import { API_URL, CONFIG_MESSAGES, ROLE } from "@/constants/constans";
-import { useSessionStore } from "./sessionStore";
-import { Session } from "next-auth";
 
 export const useGlobalStore = create<StoreType>((set, get) => ({
   chats: [],
   messages: [],
   loading: false,
   navOpen: true,
-  toogleNavOpen: () => {
+  session: null,
+  getSession: async function () {
+    const { data: session } = await supabase.auth.getSession(); //@ts-ignore
+    set((state) => ({ ...state, session: session }));
+    return session;
+  },
+  toogleNavOpen: function () {
     set((state) => ({ ...state, navOpen: !state.navOpen }));
   },
-  getChats: async () => {
+  getChats: async function () {
     set((state) => ({ ...state, loading: true }));
-    const { data, error } = await supabase.from("chat").select();
-    // .eq("user_id", session!.user.id);
+    const { data, error } = await supabase
+      .from("chat")
+      .select()
+      .eq("user_id", get().session!.session.user.id);
     if (error) {
       console.log({ errorGetChats: error });
       return;
@@ -37,7 +43,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
         {
           chat_name: chat.chat_name,
           target_language: chat.target_language,
-          // user_id: session!.user.id,
+          user_id: get().session.session.user.id,
         },
       ])
       .select();
@@ -120,6 +126,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     }
   },
   sendMessageToGPT: async function (chat_id: string) {
+    get().getMessages(chat_id);
     const messages = get().messages;
     const parsedMessages = messages?.map((message) => ({
       role: message.role,

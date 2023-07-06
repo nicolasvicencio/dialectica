@@ -27,8 +27,12 @@ export interface StoreType {
   messages: Message[];
   loading: boolean;
   navOpen: boolean;
+  session: Session | null;
+  getSession: () => Promise<
+    { session: Session } | { session: null } | { session: null }
+  >;
   toogleNavOpen: () => void;
-  getChats: (id: string) => Promise<void>;
+  getChats: () => Promise<void>;
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;
   deleteChat: (id: string) => Promise<void>;
   configNewChat: (chat: Chat) => Promise<void | Message>;
@@ -42,10 +46,4 @@ export interface StoreType {
   }) => Promise<void | Message[]>;
   sendMessageToGPT: (chat_id: string) => Promise<void>;
   getLastLine: (chat_id: string) => Promise<{ content: any }[] | null>;
-}
-
-export interface SessionStoreType {
-  session: Session | "";
-  getSession: () => Promise<void>;
-  authStateChanged: () => void;
 }

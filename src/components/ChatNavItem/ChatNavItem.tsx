@@ -14,7 +14,7 @@ export default function ChatNavItem({ chat }: Props) {
 
   useEffect(() => {
     getLastLine(chat.id!).then((res) => setLastLine(res));
-  });
+  }, []);
 
   return (
     <Link
@@ -37,7 +37,7 @@ export default function ChatNavItem({ chat }: Props) {
           {chat.chat_name.toUpperCase()}
         </h4>
         <p className="text-gray-500 max-w-xs line-clamp-1">
-          {lastLine.slice(0, 33)}
+          {lastLine && lastLine.slice(0, 33)}
         </p>
       </div>
       <div className="hidden lg-block rounded-xl w-7 h-5 lg:flex lg:justify-center lg:items-center text-sky-600 font-bold lg:self-center">

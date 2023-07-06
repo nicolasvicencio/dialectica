@@ -1,10 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <main className="pattern-background-2 w-full min-h-screen overflow-y-auto ">
       <main className="flex flex-col-reverse items-center w-screen md:flex-row md:w-[80%] md:mx-auto min-h-full">

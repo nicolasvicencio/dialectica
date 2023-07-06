@@ -1,6 +1,5 @@
 import { Inter, Open_Sans, Poppins } from "next/font/google";
 import "./globals.css";
-import NextAuthSessionprovider from "./providers/sessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const open = Open_Sans({ subsets: ["latin"] });
@@ -18,9 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <NextAuthSessionprovider>{children}</NextAuthSessionprovider>
-      </body>
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }

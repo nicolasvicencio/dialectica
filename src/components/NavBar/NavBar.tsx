@@ -3,25 +3,26 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { ChatNavItem } from "../ChatNavItem";
 import { useGlobalStore } from "@/store/store";
-import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BiLogOutCircle } from "react-icons/bi";
+import { supabase } from "@/services/supabase";
 
-type Props = {};
-
-export default function NavBar({}: Props) {
-  const { chats, getChats, navOpen, toogleNavOpen } = useGlobalStore();
+export default function NavBar() {
+  const { chats, getChats, getSession, navOpen, toogleNavOpen } =
+    useGlobalStore();
   const router = useRouter();
-  const session = useSession();
 
-  function logOut() {
-    signOut();
-    router.push("/");
+  async function logOut() {
+    const { error } = await supabase.auth.signOut();
+    error ? console.log(error) : router.push("/");
   }
 
   useEffect(() => {
-    getChats();
-    console.log(session);
+    getSession().then((res) => {
+      if (res.session) {
+        getChats();
+      }
+    });
   }, []);
 
   return (

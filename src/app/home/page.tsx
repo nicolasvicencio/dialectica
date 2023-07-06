@@ -1,19 +1,11 @@
 "use client";
 import { Container } from "@/components";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 
 type Props = {};
 
 export default function page({}: Props) {
-  const { data: session, status } = useSession({
-    required: true,
-  });
-
-  if (status === "loading") {
-    return <></>;
-  }
   return (
     <Container>
       <main className="pattern-background w-full min-h-screen">
