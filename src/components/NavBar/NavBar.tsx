@@ -3,14 +3,25 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { ChatNavItem } from "../ChatNavItem";
 import { useGlobalStore } from "@/store/store";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { BiLogOutCircle } from "react-icons/bi";
 
 type Props = {};
 
 export default function NavBar({}: Props) {
   const { chats, getChats, navOpen, toogleNavOpen } = useGlobalStore();
+  const router = useRouter();
+  const session = useSession();
+
+  function logOut() {
+    signOut();
+    router.push("/");
+  }
 
   useEffect(() => {
     getChats();
+    console.log(session);
   }, []);
 
   return (
@@ -70,6 +81,13 @@ export default function NavBar({}: Props) {
             chats.map((chat) => <ChatNavItem chat={chat} key={chat.id} />)}
         </div>
       </header>
+      <button
+        onClick={logOut}
+        className="text-gray-800 py-4 px-2 hover:text-gray-600 flex gap-1 items-center justify-center"
+      >
+        <BiLogOutCircle />
+        Cerrar Session
+      </button>
     </div>
   );
 }

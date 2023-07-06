@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className="pattern-background-2 w-full min-h-screen overflow-y-auto ">
       <main className="flex flex-col-reverse items-center w-screen md:flex-row md:w-[80%] md:mx-auto min-h-full">
@@ -21,10 +24,10 @@ export default function Home() {
             </p>
             <div className="my-4">
               <Link
-                href="/createaccount"
+                href="/login"
                 className="bg-blue-600 py-2 px-4 rounded-full hover:bg-white hover:text-blue-600 transition-all"
               >
-                Crear Cuenta!
+                Ingresar!
               </Link>
             </div>
           </div>

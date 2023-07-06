@@ -28,7 +28,7 @@ export interface StoreType {
   loading: boolean;
   navOpen: boolean;
   toogleNavOpen: () => void;
-  getChats: () => Promise<void>;
+  getChats: (id: string) => Promise<void>;
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;
   deleteChat: (id: string) => Promise<void>;
   configNewChat: (chat: Chat) => Promise<void | Message>;
@@ -45,7 +45,7 @@ export interface StoreType {
 }
 
 export interface SessionStoreType {
-  session: Session | null;
+  session: Session | "";
   getSession: () => Promise<void>;
   authStateChanged: () => void;
 }

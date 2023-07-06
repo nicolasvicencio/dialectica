@@ -1,8 +1,10 @@
-import { supabase } from "@/services/supabase";
+import { supabase, supabaseNextAuth } from "@/services/supabase";
 import { Chat, StoreType } from "@/types/types";
 import { create } from "zustand";
 import useGPT from "@/hooks/useGTP";
 import { API_URL, CONFIG_MESSAGES, ROLE } from "@/constants/constans";
+import { useSessionStore } from "./sessionStore";
+import { Session } from "next-auth";
 
 export const useGlobalStore = create<StoreType>((set, get) => ({
   chats: [],
@@ -15,6 +17,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
   getChats: async () => {
     set((state) => ({ ...state, loading: true }));
     const { data, error } = await supabase.from("chat").select();
+    // .eq("user_id", session!.user.id);
     if (error) {
       console.log({ errorGetChats: error });
       return;
@@ -34,6 +37,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
         {
           chat_name: chat.chat_name,
           target_language: chat.target_language,
+          // user_id: session!.user.id,
         },
       ])
       .select();

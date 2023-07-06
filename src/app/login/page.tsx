@@ -1,6 +1,7 @@
 "use client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import React, { FormEvent, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
@@ -10,47 +11,22 @@ export default function page({}: Props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const supabase = createClientComponentClient();
+  const router = useRouter();
+  const { data } = useSession();
 
-  async function singInWithGithub() {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-    if (error) {
-      console.log({ errorGitHub: error });
-    }
+  if (data) {
+    router.push("/home");
   }
 
-  async function singInWithGoogle() {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-    if (error) {
-      console.log({ errorGoogle: error });
-    }
-  }
-
-  async function singInWithEmail(e: FormEvent) {
-    e.preventDefault();
-    if (email === "" || password === "") {
-      setError("Tienes que completar todos los campos");
-      return;
-    }
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    if (error) {
-      console.log({ errorEmail: error });
-    }
-  }
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div className="pattern-background-2 h-screen w-screen flex justify-center items-center">
-      <section className="bg-white p-10 rounded-md text-black flex-col flex gap-4 shadow-xl animate-fade-up ">
-        <h3 className="text-gray-900 text-xl text-center">Registrarse</h3>
-        <form className="flex flex-col gap-4" onSubmit={singInWithEmail}>
+      <section className="bg-white p-10 w-[30%] rounded-md text-black flex-col flex gap-4 shadow-xl animate-fade-up ">
+        <h3 className="text-gray-900 text-xl text-center">Ingresar </h3>
+        <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-2  ">
             <label htmlFor="email" className="text-xs">
               Email
@@ -78,7 +54,7 @@ export default function page({}: Props) {
           </p>
 
           <button type="submit" className="text-gray-500 hover:text-gray-700">
-            Registrarse
+            Ingresar/Registrarse
           </button>
         </form>
         <div className="flex gap-2 items-center ">
@@ -87,7 +63,7 @@ export default function page({}: Props) {
           <span className="h-[0.10rem] bg-gray-500 w-full"></span>
         </div>
         <button
-          onClick={singInWithGithub}
+          onClick={() => signIn("github")}
           className=" rounded-md text-gray-600 px-4 py-2  w-30 h-30  z-10 border border-gray-300 flex justify-center items-center gap-2 hover:bg-gray-200"
         >
           <AiFillGithub color="black" className="w-7 h-7" />
@@ -95,7 +71,7 @@ export default function page({}: Props) {
         </button>
         <button
           className=" rounded-md text-gray-600 px-4 py-2  w-30 h-30  z-10 border border-gray-300 flex justify-center items-center gap-2 hover:bg-gray-200"
-          onClick={singInWithGoogle}
+          onClick={() => signIn("google")}
         >
           <FcGoogle className="w-7 h-7" /> Ingresa con Google
         </button>
