@@ -22,11 +22,11 @@ export default function InputComponent({}: Props) {
       content: message,
     };
 
+    setMessage("");
     const response = await createNewMessage({
       chat_id: chat_id!,
       message: newMessage,
     });
-    setMessage("");
 
     if (response) {
       sendMessageToGPT(chat_id!);
@@ -39,6 +39,7 @@ export default function InputComponent({}: Props) {
         <input
           type="text"
           placeholder="Write your message"
+          value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="w-full shadow-sm border border-stone-300"
         />

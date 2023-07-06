@@ -1,7 +1,33 @@
 "use client";
+import { supabase } from "@/services/supabase";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [session, setSession] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      //@ts-ignore
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      //@ts-ignore
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (session) {
+    router.push("/home");
+  }
+
   return (
     <main className="pattern-background-2 w-full min-h-screen overflow-y-auto ">
       <main className="flex flex-col-reverse items-center w-screen md:flex-row md:w-[80%] md:mx-auto min-h-full">

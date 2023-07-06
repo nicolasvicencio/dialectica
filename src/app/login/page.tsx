@@ -9,7 +9,6 @@ import { FcGoogle } from "react-icons/fc";
 
 export default async function page() {
   const { getSession, session } = useGlobalStore();
-  const router = useRouter();
 
   async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -30,7 +29,6 @@ export default async function page() {
       return;
     }
   }
-
   return (
     <div className="pattern-background-2 h-screen w-screen flex justify-center items-center">
       <section className="bg-white p-10 w-[30%] rounded-md text-black flex-col flex gap-4 shadow-xl animate-fade-up ">

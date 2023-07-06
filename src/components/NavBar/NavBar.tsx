@@ -23,7 +23,7 @@ export default function NavBar() {
         getChats();
       }
     });
-  }, []);
+  }, [chats]);
 
   return (
     <div
@@ -84,10 +84,11 @@ export default function NavBar() {
       </header>
       <button
         onClick={logOut}
-        className="text-gray-800 py-4 px-2 hover:text-gray-600 flex gap-1 items-center justify-center"
+        className="text-gray-700 py-4 px-2 hover:text-gray-600 gap-1 items-center  pl-4 hidden lg:flex"
       >
         <BiLogOutCircle />
-        Cerrar Session
+
+        <h4>Cerrar Session</h4>
       </button>
     </div>
   );

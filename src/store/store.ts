@@ -126,14 +126,13 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     }
   },
   sendMessageToGPT: async function (chat_id: string) {
-    get().getMessages(chat_id);
-    const messages = get().messages;
+    const messages = await get().getMessages(chat_id);
     const parsedMessages = messages?.map((message) => ({
       role: message.role,
       content: message.content,
     }));
 
-    const requestMessage = [...CONFIG_MESSAGES, ...parsedMessages];
+    const requestMessage = [...CONFIG_MESSAGES, ...parsedMessages!];
     console.log(requestMessage);
     const response = await useGPT({ url: API_URL, body: requestMessage });
 
