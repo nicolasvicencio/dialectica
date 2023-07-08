@@ -27,6 +27,11 @@ export interface StoreType {
   messages: Message[];
   loading: boolean;
   navOpen: boolean;
+  session: any | null;
+  getSession: () => Promise<
+    { session: Session } | { session: null } | { session: null }
+  >;
+  closeSession: () => void;
   toogleNavOpen: () => void;
   getChats: () => Promise<void>;
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;

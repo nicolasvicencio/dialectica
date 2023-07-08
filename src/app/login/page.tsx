@@ -32,6 +32,7 @@ export default async function page() {
     });
     if (error) {
       console.log(error);
+      router.push("/home");
       return;
     }
     if (data) {

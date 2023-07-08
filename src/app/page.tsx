@@ -2,7 +2,7 @@
 import { useGlobalStore } from "@/store/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   const { getSession } = useGlobalStore();
@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     getSession().then((res) => {
       if (res.session) {
-        router.push("/home");
+        router.push("/main");
       }
     });
   }, []);
