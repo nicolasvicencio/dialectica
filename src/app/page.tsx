@@ -1,6 +1,21 @@
+"use client";
+import { useGlobalStore } from "@/store/store";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { getSession } = useGlobalStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    getSession().then((res) => {
+      if (res.session) {
+        router.push("/home");
+      }
+    });
+  }, []);
+
   return (
     <main className="pattern-background-2 w-full min-h-screen overflow-y-auto ">
       <main className="flex flex-col-reverse items-center w-screen md:flex-row md:w-[80%] md:mx-auto min-h-full">

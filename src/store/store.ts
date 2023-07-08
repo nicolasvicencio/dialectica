@@ -15,6 +15,9 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     set((state) => ({ ...state, session: session }));
     return session;
   },
+  closeSession: function () {
+    set((state) => ({ ...state, session: null }));
+  },
   toogleNavOpen: function () {
     set((state) => ({ ...state, navOpen: !state.navOpen }));
   },

@@ -8,13 +8,16 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { supabase } from "@/services/supabase";
 
 export default function NavBar() {
-  const { chats, getChats, getSession, navOpen, toogleNavOpen } =
+  const { closeSession, chats, getChats, getSession, navOpen, toogleNavOpen } =
     useGlobalStore();
   const router = useRouter();
 
-  async function logOut() {
-    const { error } = await supabase.auth.signOut();
-    error ? console.log(error) : router.push("/");
+  function logOut() {
+    supabase.auth.signOut().then((res) => {
+      if (res.error) return console.log(res.error);
+      closeSession();
+      router.push("/");
+    });
   }
 
   useEffect(() => {
