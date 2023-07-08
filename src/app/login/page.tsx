@@ -15,6 +15,9 @@ export default async function page() {
     setLoading(true);
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: "https://dialectica.vercel.app/main",
+      },
     });
     if (error) {
       console.log(error);
@@ -29,10 +32,12 @@ export default async function page() {
     setLoading(true);
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
+      options: {
+        redirectTo: "https://dialectica.vercel.app/main",
+      },
     });
     if (error) {
       console.log(error);
-      router.push("/home");
       return;
     }
     if (data) {
@@ -42,8 +47,10 @@ export default async function page() {
 
   if (loading)
     return (
-      <div>
-        <ClipLoader />
+      <div className="pattern-background-2 h-screen w-screen flex justify-center items-center">
+        <section className="bg-white p-10 w-[30%] rounded-md text-black flex-col flex gap-4 shadow-xl animate-fade-up ">
+          <ClipLoader />
+        </section>
       </div>
     );
 

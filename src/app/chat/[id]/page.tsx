@@ -1,19 +1,21 @@
 "use client";
 import { ChatBubble, Container, InputComponent, TopBar } from "@/components";
 import { useGlobalStore } from "@/store/store";
+import { Message } from "@/types/types";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 
 type Props = {};
 
 export default function page({}: Props) {
   const pathName = usePathname();
+  const [messages, setMessages] = useState<Message[] | null>([]);
   const id = pathName.split("/").reverse()[0];
-  const { messages, getMessages } = useGlobalStore();
+  const { getMessages } = useGlobalStore();
 
   useEffect(() => {
-    getMessages(id);
+    getMessages(id).then((res) => setMessages(res!));
   }, []);
 
   if (!messages)

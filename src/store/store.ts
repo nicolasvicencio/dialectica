@@ -5,8 +5,6 @@ import useGPT from "@/hooks/useGTP";
 import { API_URL, CONFIG_MESSAGES, ROLE } from "@/constants/constans";
 
 export const useGlobalStore = create<StoreType>((set, get) => ({
-  chats: [],
-  messages: [],
   loading: false,
   navOpen: true,
   session: null,
@@ -32,11 +30,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
       return;
     }
     if (data) {
-      set((state) => ({
-        ...state,
-        chats: data,
-        loading: false,
-      }));
+      return data;
     }
   },
   createNewChat: async function (chat: Chat) {
@@ -104,11 +98,6 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
       return;
     }
     if (data) {
-      set((state) => ({
-        ...state,
-        messages: data,
-        loading: false,
-      }));
       return data;
     }
   },

@@ -23,8 +23,6 @@ export interface OpenAIMessage {
 }
 
 export interface StoreType {
-  chats: Chat[];
-  messages: Message[];
   loading: boolean;
   navOpen: boolean;
   session: any | null;
@@ -33,7 +31,7 @@ export interface StoreType {
   >;
   closeSession: () => void;
   toogleNavOpen: () => void;
-  getChats: () => Promise<void>;
+  getChats: () => Promise<void | Chat[]>;
   createNewChat: (chat: Chat) => Promise<void | Chat[]>;
   deleteChat: (id: string) => Promise<void>;
   configNewChat: (chat: Chat) => Promise<void | Message>;

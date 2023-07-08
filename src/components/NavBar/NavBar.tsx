@@ -1,15 +1,17 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ChatNavItem } from "../ChatNavItem";
 import { useGlobalStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { BiLogOutCircle } from "react-icons/bi";
 import { supabase } from "@/services/supabase";
+import { Chat } from "@/types/types";
 
 export default function NavBar() {
-  const { closeSession, chats, getChats, getSession, navOpen, toogleNavOpen } =
+  const { closeSession, getChats, getSession, navOpen, toogleNavOpen } =
     useGlobalStore();
+  const [chats, setChats] = useState<Chat[] | null>(null);
   const router = useRouter();
 
   function logOut() {
@@ -23,7 +25,7 @@ export default function NavBar() {
   useEffect(() => {
     getSession().then((res) => {
       if (res.session) {
-        getChats();
+        getChats().then((res) => setChats(res!));
       }
     });
   }, [chats]);
