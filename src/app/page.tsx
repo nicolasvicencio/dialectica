@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
 
   if (session) {
-    router.push("/home");
+    router.push("https://dialectica.vercel.app/home");
   }
 
   return (
