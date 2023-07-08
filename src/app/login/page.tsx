@@ -1,16 +1,18 @@
 "use client";
 import { RegisterForm } from "@/components";
 import { supabase } from "@/services/supabase";
-import { useGlobalStore } from "@/store/store";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { FormEvent, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+import { ClipLoader } from "react-spinners";
 
 export default async function page() {
-  const { getSession, session } = useGlobalStore();
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   async function signInWithGoogle() {
+    setLoading(true);
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
@@ -18,9 +20,13 @@ export default async function page() {
       console.log(error);
       return;
     }
+    if (data) {
+      setLoading(false);
+    }
   }
 
   async function singInWithGithub() {
+    setLoading(true);
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
     });
@@ -28,7 +34,18 @@ export default async function page() {
       console.log(error);
       return;
     }
+    if (data) {
+      setLoading(false);
+    }
   }
+
+  if (loading)
+    return (
+      <div>
+        <ClipLoader />
+      </div>
+    );
+
   return (
     <div className="pattern-background-2 h-screen w-screen flex justify-center items-center">
       <section className="bg-white p-10 w-[30%] rounded-md text-black flex-col flex gap-4 shadow-xl animate-fade-up ">
