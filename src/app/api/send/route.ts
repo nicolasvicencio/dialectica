@@ -12,5 +12,12 @@ export async function POST(request: Request) {
   const response = completion.data.choices[0].message;
 
   console.log(messages);
-  return new Response(JSON.stringify(response));
+  return new Response(JSON.stringify(response), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 }
