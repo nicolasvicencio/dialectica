@@ -8,6 +8,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
   loading: false,
   navOpen: true,
   session: null,
+  reload: false,
   getSession: async function () {
     const { data: session } = await supabase.auth.getSession(); //@ts-ignore
     set((state) => ({ ...state, session: session }));
@@ -114,6 +115,7 @@ export const useGlobalStore = create<StoreType>((set, get) => ({
     }
     if (data) {
       get().getMessages(chat_id);
+      set((state) => ({ ...state, reload: !state.reload }));
       return data;
     }
   },

@@ -26,6 +26,7 @@ export interface StoreType {
   loading: boolean;
   navOpen: boolean;
   session: any | null;
+  reload: boolean;
   getSession: () => Promise<
     { session: Session } | { session: null } | { session: null }
   >;

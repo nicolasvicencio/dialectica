@@ -12,11 +12,11 @@ export default function page({}: Props) {
   const pathName = usePathname();
   const [messages, setMessages] = useState<Message[] | null>([]);
   const id = pathName.split("/").reverse()[0];
-  const { getMessages } = useGlobalStore();
+  const { getMessages, reload } = useGlobalStore();
 
   useEffect(() => {
     getMessages(id).then((res) => setMessages(res!));
-  }, []);
+  }, [reload]);
 
   if (!messages)
     return (
